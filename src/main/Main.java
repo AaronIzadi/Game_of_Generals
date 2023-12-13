@@ -1,3 +1,5 @@
+package main;
+
 import logic.LogicalAgent;
 import model.Color;
 import model.piece.PieceType;
