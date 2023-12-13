@@ -36,8 +36,8 @@ public class Piece {
             if (this.currentCell.getX() == 0 && this.currentCell.getY() == 0) {
 
                 if (getPlayer().getHitPiece().contains(this.type)) {
-                    for (PieceType type: getPlayer().getHitPiece()) {
-                        if (type==this.type){
+                    for (PieceType type : getPlayer().getHitPiece()) {
+                        if (type == this.type) {
                             getPlayer().removeHitPiece(this.getType());
                             break;
                         }

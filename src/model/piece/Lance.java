@@ -40,6 +40,7 @@ public class Lance extends Piece {
 
 
         if (this.isActivated()) {
+
             if (x2 == x1 && y2 > y1) {
                 for (int i = 1; i < y2 - y1; i++) {
                     for (Piece piece : getPlayer().getRival().getPieces()) {
@@ -106,11 +107,12 @@ public class Lance extends Piece {
                     }
                 }
                 return true;
+            } else {
+                return false;
             }
-            return false;
         }
 
-        if (x2 != x1 && y2 == y1) {
+        if (x2 != x1) {
             return false;
         }
 

@@ -13,16 +13,15 @@ public class Player {
     private final int playerNumber;
     private Piece selectedPiece;
     private final Color color;
-    private List<PieceType> hitPiece = new LinkedList<>();
-
+    private final List<PieceType> hitPiece = new LinkedList<>();
     public static final int PLAYER_BLACK = 1;
     public static final int PLAYER_WHITE = 2;
 
-    public Player(int playerNumber){
+    public Player(int playerNumber) {
         this.playerNumber = playerNumber;
-        if (playerNumber==1){
+        if (playerNumber == 1) {
             this.color = Color.BLACK;
-        }else{
+        } else {
             this.color = Color.WHITE;
         }
     }
@@ -63,13 +62,23 @@ public class Player {
         selectedPiece = null;
     }
 
-    public void addHitPiece(PieceType pieceType) { hitPiece.add(pieceType); }
+    public void addHitPiece(PieceType pieceType) {
+        hitPiece.add(pieceType);
+    }
 
-    public void removeHitPiece(PieceType pieceType) { hitPiece.remove(pieceType); }
+    public void removeHitPiece(PieceType pieceType) {
+        hitPiece.remove(pieceType);
+    }
 
-    public List<PieceType> getHitPiece() { return hitPiece; }
+    public List<PieceType> getHitPiece() {
+        return hitPiece;
+    }
 
-    public void addPiece(Piece piece){ pieces.add(piece); }
+    public void addPiece(Piece piece) {
+        pieces.add(piece);
+    }
 
-    public void removePiece(Piece piece){ pieces.remove(piece); }
+    public void removePiece(Piece piece) {
+        pieces.remove(piece);
+    }
 }

@@ -42,7 +42,7 @@ public class GameState {
 
         for (int x = 1; x < 6; x++) {
             for (int y = 1; y < 6; y++) {
-                Piece piece = board.whichPieceExist(y,x);
+                Piece piece = board.whichPieceExist(y, x);
                 if (piece != null) {
                     if (piece.getColor() == Color.WHITE) {
                         switch (piece.getType()) {

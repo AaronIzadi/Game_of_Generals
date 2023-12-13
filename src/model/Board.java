@@ -1,6 +1,7 @@
 package model;
 
 import model.piece.Piece;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,8 +14,8 @@ public class Board {
     private Player player2;
 
 
-    public static Board getInstance(){
-        if (board == null){
+    public static Board getInstance() {
+        if (board == null) {
             board = new Board();
         }
         return board;
@@ -34,17 +35,29 @@ public class Board {
         this.pieces = pieces;
     }
 
-    public void setPlayer1(Player player1) { this.player1 = player1; }
+    public void setPlayer1(Player player1) {
+        this.player1 = player1;
+    }
 
-    public void setPlayer2(Player player2) { this.player2 = player2; }
+    public void setPlayer2(Player player2) {
+        this.player2 = player2;
+    }
 
-    public Player getPlayer1() { return player1; }
+    public Player getPlayer1() {
+        return player1;
+    }
 
-    public Player getPlayer2() { return player2; }
+    public Player getPlayer2() {
+        return player2;
+    }
 
-    public void removePiece(Piece piece) { pieces.remove(piece); }
+    public void removePiece(Piece piece) {
+        pieces.remove(piece);
+    }
 
-    public void addPiece(Piece piece) { pieces.add(piece); }
+    public void addPiece(Piece piece) {
+        pieces.add(piece);
+    }
 
     public static Board getBoard() {
         return board;
