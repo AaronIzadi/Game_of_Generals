@@ -1,4 +1,4 @@
-package model;
+package Game_of_Generals.model;
 
 public enum Color {
 

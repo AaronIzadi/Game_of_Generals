@@ -1,7 +1,7 @@
-package model;
+package Game_of_Generals.model;
 
-import model.piece.Piece;
-import model.piece.PieceType;
+import Game_of_Generals.model.piece.Piece;
+import Game_of_Generals.model.piece.PieceType;
 
 import java.util.LinkedList;
 import java.util.List;

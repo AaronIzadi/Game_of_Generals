@@ -1,4 +1,4 @@
-package model.piece;
+package Game_of_Generals.model.piece;
 
 public enum PieceType {
 

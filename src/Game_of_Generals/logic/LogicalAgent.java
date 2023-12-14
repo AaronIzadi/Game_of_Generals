@@ -1,8 +1,8 @@
-package logic;
+package Game_of_Generals.logic;
 
-import model.*;
-import model.piece.Piece;
-import model.piece.PieceType;
+import Game_of_Generals.model.*;
+import Game_of_Generals.model.piece.Piece;
+import Game_of_Generals.model.piece.PieceType;
 
 public class LogicalAgent {
 

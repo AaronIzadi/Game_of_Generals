@@ -1,6 +1,6 @@
-package model;
+package Game_of_Generals.model;
 
-import model.piece.Piece;
+import Game_of_Generals.model.piece.Piece;
 
 import java.util.List;
 

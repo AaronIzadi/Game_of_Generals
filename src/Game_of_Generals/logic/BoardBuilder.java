@@ -1,10 +1,10 @@
-package logic;
+package Game_of_Generals.logic;
 
-import model.Board;
-import model.Cell;
-import model.Color;
-import model.Player;
-import model.piece.*;
+import Game_of_Generals.model.Board;
+import Game_of_Generals.model.Cell;
+import Game_of_Generals.model.Color;
+import Game_of_Generals.model.Player;
+import Game_of_Generals.model.piece.*;
 
 import java.util.LinkedList;
 import java.util.List;

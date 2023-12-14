@@ -1,8 +1,8 @@
-package main;
+package Game_of_Generals.main;
 
-import logic.LogicalAgent;
-import model.Color;
-import model.piece.PieceType;
+import Game_of_Generals.logic.LogicalAgent;
+import Game_of_Generals.model.Color;
+import Game_of_Generals.model.piece.PieceType;
 
 import java.util.Scanner;
 
