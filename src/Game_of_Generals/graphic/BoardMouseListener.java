@@ -3,8 +3,9 @@ package Game_of_Generals.graphic;
 import Game_of_Generals.logic.LogicalAgent;
 
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class BoardMouseListener implements DummyListener {
+public class BoardMouseListener implements MouseListener {
 
     private final LogicalAgent logicalAgent = new LogicalAgent();
 
@@ -12,9 +13,29 @@ public class BoardMouseListener implements DummyListener {
     }
 
     @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
     public void mousePressed(MouseEvent e) {
-        int xa = e.getX();
-        int ya = e.getY();
-        logicalAgent.selectCell((xa / 144) + 1, (ya / 144) + 1);
+        int x = e.getX();
+        int y = e.getY();
+        logicalAgent.selectCell((x / 144) + 1, (y / 144) + 1);
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }
