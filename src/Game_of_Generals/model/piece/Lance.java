@@ -1,8 +1,8 @@
-package model.piece;
+package Game_of_Generals.model.piece;
 
-import model.Cell;
-import model.Color;
-import model.Player;
+import Game_of_Generals.model.Cell;
+import Game_of_Generals.model.Color;
+import Game_of_Generals.model.Player;
 
 public class Lance extends Piece {
 
