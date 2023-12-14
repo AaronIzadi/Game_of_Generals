@@ -15,12 +15,12 @@ public class Pawn extends Piece {
     public boolean isValidMove(Cell destination) {
 
         Cell currentCell = this.getCurrentCell();
-        int x1 = currentCell.getX();
-        int y1 = currentCell.getY();
-        int x2 = destination.getX();
-        int y2 = destination.getY();
+        int x1 = (currentCell.getX() / 144);
+        int y1 = (currentCell.getY() / 144);
+        int x2 = (destination.getX() / 144);
+        int y2 = (destination.getY() / 144);
 
-        if (x2 > 5 || x2 < 1 || y2 > 5 || y2 < 1) {
+        if (x2 > 6 || x2 < 1 || y2 > 5 || y2 < 0) {
             return false;
         }
 
@@ -122,21 +122,25 @@ public class Pawn extends Piece {
         }
 
         if (this.getColor() == Color.WHITE) {
-            if (x1 != x2 || y2 != y1 + 1) {
+            if (x1 != x2) {
                 return false;
             }
-            for (Piece piece : getPlayer().getPieces()) {
-                if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
-                    return false;
+            if (y2 == y1 - 1) {
+                for (Piece piece : getPlayer().getPieces()) {
+                    if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
+                        return false;
+                    }
                 }
             }
         } else {
-            if (x1 != x2 || y2 != y1 - 1) {
+            if (x1 != x2) {
                 return false;
             }
-            for (Piece piece : getPlayer().getPieces()) {
-                if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
-                    return false;
+            if (y2 == y1 + 1) {
+                for (Piece piece : getPlayer().getPieces()) {
+                    if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
+                        return false;
+                    }
                 }
             }
         }

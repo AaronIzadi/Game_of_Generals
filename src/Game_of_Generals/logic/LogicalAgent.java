@@ -10,6 +10,7 @@ public class LogicalAgent {
     private final GameState gameState;
     private final BoardBuilder boardBuilder = new BoardBuilder();
     private Board board = Board.getInstance();
+    private Cell current;
 
 
     public LogicalAgent() {
@@ -84,31 +85,28 @@ public class LogicalAgent {
         Cell cell = GameEngine.getInstance().getBoard().getCell(x, y);
         if (player.getSelectedPiece() == null && cell.getPiece() != null && cell.getPiece().getPlayer().equals(player)) {
             player.setSelectedPiece(cell.getPiece());
+            current = cell;
         } else if (player.getSelectedPiece() != null) {
             if (cell.getPiece() != null && cell.getPiece().getPlayer().equals(player)) {
                 player.setSelectedPiece(cell.getPiece());
+                current = cell;
             } else {
                 Piece piece = player.getSelectedPiece();
                 if (piece.isValidMove(cell)) {
                     piece.moveTo(cell);
+                    updateBoard(current, cell);
                     GameEngine.getInstance().setNextPlayer();
                 }
             }
         }
-
-
-        // TODO update board
         checkForEndGame();
     }
 
     public void updateBoard(Cell current, Cell destination) {
-        for (Piece thePiece : board.getPieces()) {
-            if (thePiece.getCurrentCell() == current) {
-                thePiece.setCurrentCell(destination);
-                destination.setPiece(thePiece);
-            }
-        }
+        Piece piece = current.getPiece();
+        piece.setCurrentCell(destination);
         current.setPiece(null);
+        destination.setPiece(piece);
     }
 
 }

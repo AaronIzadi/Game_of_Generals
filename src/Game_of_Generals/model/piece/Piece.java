@@ -49,32 +49,30 @@ public class Piece {
             }
 
             Piece hitPiece = null;
-            for (Piece piece : getPlayer().getRival().getPieces()) {
-                if (piece.getCurrentCell().getX() == destination.getX() && piece.getCurrentCell().getY() == destination.getY()) {
-                    if (piece.getType() != PieceType.KING) {
-                        hitPiece = piece;
-                    } else {
-                        piece.setAlive(false);
-                        getPlayer().addHitPiece(piece.getType());
-                    }
+            Piece piece = destination.getPiece();
+            if (piece != null) {
+                if (piece.getType() != PieceType.KING) {
+                    hitPiece = piece;
+                    piece.setAlive(false);
+                    piece.setColor(this.getColor());
+                    getPlayer().addHitPiece(piece.getType());
                 }
             }
+
             if (hitPiece != null) {
                 List<Piece> newRivalPieces = getPlayer().getRival().getPieces();
                 newRivalPieces.remove(hitPiece);
                 getPlayer().getRival().setPieces(newRivalPieces);
-                Cell emptyCell = null;
-                for (Cell cell : board.getCells()) {
-                    if (cell.getX() == 0 && cell.getY() == 0) {
-                        emptyCell = cell;
-                    }
+
+                int index = getPlayer().getHitPiece().size();
+                if (this.getColor() == Color.WHITE) {
+                    hitPiece.setCurrentCell(board.getCell(0, 5 - index));
+                } else {
+                    hitPiece.setCurrentCell(board.getCell(6, index));
                 }
-                hitPiece.setCurrentCell(emptyCell);
                 hitPiece.setPlayer(getPlayer());
-                hitPiece.setColor(getPlayer().getColor());
                 hitPiece.setActivated(false);
                 hitPiece.setAlive(false);
-                getPlayer().addHitPiece(hitPiece.getType());
                 List<Piece> newPlayerPieces = getPlayer().getPieces();
                 newPlayerPieces.add(hitPiece);
                 getPlayer().setPieces(newPlayerPieces);

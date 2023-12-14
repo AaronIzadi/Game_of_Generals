@@ -7,16 +7,17 @@ import Game_of_Generals.model.Player;
 
 import javax.swing.*;
 
-public class GameEngine {
+public class GameEngine implements Runnable{
 
     private static final GameEngine instance = new GameEngine();
     private final static int WIDTH = 1008, HEIGHT = 720;
     private final ImageLoader imageLoader = ImageLoader.getInstance();
-    private GameState gameState = GameState.START_SCREEN;
+    private GameState gameState = GameState.RUNNING;
     private StartScreenSelection startScreenSelection = StartScreenSelection.START_GAME;
     private UIManager uiManager;
     private BoardBuilder boardBuilder = new BoardBuilder();
     private Board board;
+    private Thread thread;
     private Player currentPlayer;
 
     public static GameEngine getInstance() {
@@ -38,12 +39,56 @@ public class GameEngine {
         JFrame frame = new JFrame("Game of Generals");
         frame.setIconImage(imageLoader.getIcon());
         frame.add(uiManager);
+        frame.addMouseListener(new BoardMouseListener());
         //frame.addKeyListener(inputManager);
         frame.pack();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
+        thread = new Thread(this);
+        thread.start();
+    }
+
+    @Override
+    public void run() {
+        renderLoop();
+        long lastTime = System.nanoTime();
+        double amountOfTicks = 60.0;
+        double ns = 1000000000 / amountOfTicks;
+        double delta = 0;
+        long timer = System.currentTimeMillis();
+
+        while (!thread.isInterrupted()) {
+            long now = System.nanoTime();
+            delta += (now - lastTime) / ns;
+            lastTime = now;
+            while (delta >= 1) {
+                delta--;
+            }
+
+            if (gameState != GameState.RUNNING) {
+                timer = System.currentTimeMillis();
+            }
+
+            if (System.currentTimeMillis() - timer > 1000) {
+                timer += 1000;
+            }
+        }
+    }
+
+    private void renderLoop() {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(12);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                uiManager.repaint();
+            }
+        }).start();
     }
 
     public UIManager getUiManager() {

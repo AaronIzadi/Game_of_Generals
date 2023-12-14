@@ -73,7 +73,7 @@ public class Board {
 
     public Cell getCell(int x, int y) {
         for (Cell cell : cells) {
-            if (cell.getX() == x && cell.getY() == y) {
+            if ((cell.getX()/144)+1 == x && (cell.getY()/144)+1 == y) {
                 return cell;
             }
         }
