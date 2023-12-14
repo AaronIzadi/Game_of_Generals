@@ -17,37 +17,53 @@ public class BoardBuilder {
 
         List<Cell> cells = new LinkedList<>();
         List<Piece> pieces = new LinkedList<>();
+        int constant = 144;
 
         //CELLS
-        Cell cell11 = new Cell(Color.DARK_GREY, 1, 1);
-        Cell cell12 = new Cell(Color.LIGHT_GREY, 1, 2);
-        Cell cell13 = new Cell(Color.DARK_GREY, 1, 3);
-        Cell cell14 = new Cell(Color.LIGHT_GREY, 1, 4);
-        Cell cell15 = new Cell(Color.DARK_GREY, 1, 5);
-        Cell cell21 = new Cell(Color.LIGHT_GREY, 2, 1);
-        Cell cell22 = new Cell(Color.DARK_GREY, 2, 2);
-        Cell cell23 = new Cell(Color.LIGHT_GREY, 2, 3);
-        Cell cell24 = new Cell(Color.DARK_GREY, 2, 4);
-        Cell cell25 = new Cell(Color.LIGHT_GREY, 2, 5);
-        Cell cell31 = new Cell(Color.DARK_GREY, 3, 1);
-        Cell cell32 = new Cell(Color.LIGHT_GREY, 3, 2);
-        Cell cell33 = new Cell(Color.DARK_GREY, 3, 3);
-        Cell cell34 = new Cell(Color.LIGHT_GREY, 3, 4);
-        Cell cell35 = new Cell(Color.DARK_GREY, 3, 5);
-        Cell cell41 = new Cell(Color.LIGHT_GREY, 4, 1);
-        Cell cell42 = new Cell(Color.DARK_GREY, 4, 2);
-        Cell cell43 = new Cell(Color.LIGHT_GREY, 4, 3);
-        Cell cell44 = new Cell(Color.DARK_GREY, 4, 4);
-        Cell cell45 = new Cell(Color.LIGHT_GREY, 4, 5);
-        Cell cell51 = new Cell(Color.DARK_GREY, 5, 1);
-        Cell cell52 = new Cell(Color.LIGHT_GREY, 5, 2);
-        Cell cell53 = new Cell(Color.DARK_GREY, 5, 3);
-        Cell cell54 = new Cell(Color.LIGHT_GREY, 5, 4);
-        Cell cell55 = new Cell(Color.DARK_GREY, 5, 5);
-        Cell cell00 = new Cell(null, 0, 0);
+        Cell cell01 = new Cell(Color.BROWN, 0, 0);
+        Cell cell02 = new Cell(Color.BROWN, 0, constant);
+        Cell cell03 = new Cell(Color.BROWN, 0, 2 * constant);
+        Cell cell04 = new Cell(Color.BROWN, 0, 3 * constant);
+        Cell cell05 = new Cell(Color.BROWN, 0, 4 * constant);
+        Cell cell11 = new Cell(Color.DARK_GREY, constant, 0);
+        Cell cell12 = new Cell(Color.LIGHT_GREY, constant, constant);
+        Cell cell13 = new Cell(Color.DARK_GREY, constant, 2 * constant);
+        Cell cell14 = new Cell(Color.LIGHT_GREY, constant, 3 * constant);
+        Cell cell15 = new Cell(Color.DARK_GREY, constant, 4 * constant);
+        Cell cell21 = new Cell(Color.LIGHT_GREY, 2 * constant, 0);
+        Cell cell22 = new Cell(Color.DARK_GREY, 2 * constant, constant);
+        Cell cell23 = new Cell(Color.LIGHT_GREY, 2 * constant, 2 * constant);
+        Cell cell24 = new Cell(Color.DARK_GREY, 2 * constant, 3 * constant);
+        Cell cell25 = new Cell(Color.LIGHT_GREY, 2 * constant, 4 * constant);
+        Cell cell31 = new Cell(Color.DARK_GREY, 3 * constant, 0);
+        Cell cell32 = new Cell(Color.LIGHT_GREY, 3 * constant, constant);
+        Cell cell33 = new Cell(Color.DARK_GREY, 3 * constant, 2 * constant);
+        Cell cell34 = new Cell(Color.LIGHT_GREY, 3 * constant, 3 * constant);
+        Cell cell35 = new Cell(Color.DARK_GREY, 3 * constant, 4 * constant);
+        Cell cell41 = new Cell(Color.LIGHT_GREY, 4 * constant, 0);
+        Cell cell42 = new Cell(Color.DARK_GREY, 4 * constant, constant);
+        Cell cell43 = new Cell(Color.LIGHT_GREY, 4 * constant, 2 * constant);
+        Cell cell44 = new Cell(Color.DARK_GREY, 4 * constant, 3 * constant);
+        Cell cell45 = new Cell(Color.LIGHT_GREY, 4 * constant, 4 * constant);
+        Cell cell51 = new Cell(Color.DARK_GREY, 5 * constant, 0);
+        Cell cell52 = new Cell(Color.LIGHT_GREY, 5 * constant, constant);
+        Cell cell53 = new Cell(Color.DARK_GREY, 5 * constant, 2 * constant);
+        Cell cell54 = new Cell(Color.LIGHT_GREY, 5 * constant, 3 * constant);
+        Cell cell55 = new Cell(Color.DARK_GREY, 5 * constant, 4 * constant);
+        Cell cell61 = new Cell(Color.BROWN, 6 * constant, 0);
+        Cell cell62 = new Cell(Color.BROWN, 6 * constant, constant);
+        Cell cell63 = new Cell(Color.BROWN, 6 * constant, 2 * constant);
+        Cell cell64 = new Cell(Color.BROWN, 6 * constant, 3 * constant);
+        Cell cell65 = new Cell(Color.BROWN, 6 * constant, 4 * constant);
 
 
         //SET CELLS
+        cells.add(cell01);
+        cells.add(cell02);
+        cells.add(cell03);
+        cells.add(cell04);
+        cells.add(cell05);
+
         cells.add(cell11);
         cells.add(cell21);
         cells.add(cell31);
@@ -73,24 +89,34 @@ public class BoardBuilder {
         cells.add(cell35);
         cells.add(cell45);
         cells.add(cell55);
-        cells.add(cell00);
 
+        cells.add(cell61);
+        cells.add(cell62);
+        cells.add(cell63);
+        cells.add(cell64);
+        cells.add(cell65);
 
         //BLACK PIECES
         Player player1 = new Player(Player.PLAYER_BLACK);
 
         Piece kingBlack = new King(player1, Color.BLACK);
-        kingBlack.setCurrentCell(cell55);
+        kingBlack.setCurrentCell(cell51);
+        cell51.setPiece(kingBlack);
         Piece goldenGeneralBlack = new GoldenGeneral(player1, Color.BLACK);
-        goldenGeneralBlack.setCurrentCell(cell45);
+        goldenGeneralBlack.setCurrentCell(cell41);
+        cell41.setPiece(goldenGeneralBlack);
         Piece silverGeneralBlack = new SilverGeneral(player1, Color.BLACK);
-        silverGeneralBlack.setCurrentCell(cell35);
+        silverGeneralBlack.setCurrentCell(cell31);
+        cell31.setPiece(silverGeneralBlack);
         Piece bishopBlack = new Bishop(player1, Color.BLACK);
-        bishopBlack.setCurrentCell(cell25);
+        bishopBlack.setCurrentCell(cell21);
+        cell21.setPiece(bishopBlack);
         Piece lanceBlack = new Lance(player1, Color.BLACK);
-        lanceBlack.setCurrentCell(cell15);
+        lanceBlack.setCurrentCell(cell11);
+        cell11.setPiece(lanceBlack);
         Piece pawnBlack = new Pawn(player1, Color.BLACK);
-        pawnBlack.setCurrentCell(cell54);
+        pawnBlack.setCurrentCell(cell52);
+        cell52.setPiece(pawnBlack);
 
         List<Piece> blackPieces = new LinkedList<>();
         blackPieces.add(kingBlack);
@@ -107,17 +133,23 @@ public class BoardBuilder {
         Player player2 = new Player(Player.PLAYER_WHITE);
 
         Piece kingWhite = new King(player2, Color.WHITE);
-        kingWhite.setCurrentCell(cell11);
+        kingWhite.setCurrentCell(cell15);
+        cell15.setPiece(kingWhite);
         Piece goldenGeneralWhite = new GoldenGeneral(player2, Color.WHITE);
-        goldenGeneralWhite.setCurrentCell(cell21);
+        goldenGeneralWhite.setCurrentCell(cell25);
+        cell25.setPiece(goldenGeneralWhite);
         Piece silverGeneralWhite = new SilverGeneral(player2, Color.WHITE);
-        silverGeneralWhite.setCurrentCell(cell31);
+        silverGeneralWhite.setCurrentCell(cell35);
+        cell35.setPiece(silverGeneralWhite);
         Piece bishopWhite = new Bishop(player2, Color.WHITE);
-        bishopWhite.setCurrentCell(cell41);
+        bishopWhite.setCurrentCell(cell45);
+        cell45.setPiece(bishopWhite);
         Piece lanceWhite = new Lance(player2, Color.WHITE);
-        lanceWhite.setCurrentCell(cell51);
+        lanceWhite.setCurrentCell(cell55);
+        cell55.setPiece(lanceWhite);
         Piece pawnWhite = new Pawn(player2, Color.WHITE);
-        pawnWhite.setCurrentCell(cell12);
+        pawnWhite.setCurrentCell(cell14);
+        cell14.setPiece(pawnWhite);
 
         List<Piece> whitePieces = new LinkedList<>();
         whitePieces.add(kingWhite);
@@ -147,4 +179,5 @@ public class BoardBuilder {
 
         return board;
     }
+
 }

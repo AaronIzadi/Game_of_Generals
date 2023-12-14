@@ -1,5 +1,6 @@
 package Game_of_Generals.main;
 
+import Game_of_Generals.graphic.GameEngine;
 import Game_of_Generals.logic.LogicalAgent;
 import Game_of_Generals.model.Color;
 import Game_of_Generals.model.piece.PieceType;
@@ -10,6 +11,8 @@ public class Main {
     public static void main(String[] args) {
 
         LogicalAgent logicalAgent = new LogicalAgent();
+
+        GameEngine.getInstance();
 
         Scanner sc = new Scanner(System.in);
 

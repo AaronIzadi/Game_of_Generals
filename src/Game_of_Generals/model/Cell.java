@@ -7,6 +7,7 @@ import java.util.List;
 public class Cell {
 
     private Color color;
+    private Piece piece;
     private final int x;
     private final int y;
 
@@ -43,5 +44,13 @@ public class Cell {
             }
         }
         return false;
+    }
+
+    public void setPiece(Piece piece) {
+        this.piece = piece;
+    }
+
+    public Piece getPiece() {
+        return piece;
     }
 }

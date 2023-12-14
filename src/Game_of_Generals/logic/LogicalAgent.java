@@ -1,5 +1,6 @@
 package Game_of_Generals.logic;
 
+import Game_of_Generals.graphic.GameEngine;
 import Game_of_Generals.model.*;
 import Game_of_Generals.model.piece.Piece;
 import Game_of_Generals.model.piece.PieceType;
@@ -68,7 +69,7 @@ public class LogicalAgent {
     }
 
     public Cell getDestination(int x, int y) {
-        if (x > 0 && x < 6 && y > 0 && y < 6) {
+        if (x > 0 && x < 6 && y > 0 && y < 5) {
             for (Cell cell : board.getCells()) {
                 if (cell.getX() == x && cell.getY() == y) {
                     return cell;
@@ -76,6 +77,38 @@ public class LogicalAgent {
             }
         }
         return null;
+    }
+
+    public void selectCell(int x, int y) {
+        Player player = GameEngine.getInstance().getCurrentPlayer();
+        Cell cell = GameEngine.getInstance().getBoard().getCell(x, y);
+        if (player.getSelectedPiece() == null && cell.getPiece() != null && cell.getPiece().getPlayer().equals(player)) {
+            player.setSelectedPiece(cell.getPiece());
+        } else if (player.getSelectedPiece() != null) {
+            if (cell.getPiece() != null && cell.getPiece().getPlayer().equals(player)) {
+                player.setSelectedPiece(cell.getPiece());
+            } else {
+                Piece piece = player.getSelectedPiece();
+                if (piece.isValidMove(cell)) {
+                    piece.moveTo(cell);
+                    GameEngine.getInstance().setNextPlayer();
+                }
+            }
+        }
+
+
+        // TODO update board
+        checkForEndGame();
+    }
+
+    public void updateBoard(Cell current, Cell destination) {
+        for (Piece thePiece : board.getPieces()) {
+            if (thePiece.getCurrentCell() == current) {
+                thePiece.setCurrentCell(destination);
+                destination.setPiece(thePiece);
+            }
+        }
+        current.setPiece(null);
     }
 
 }
