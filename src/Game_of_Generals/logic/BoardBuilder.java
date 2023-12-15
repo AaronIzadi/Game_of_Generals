@@ -21,11 +21,11 @@ public class BoardBuilder {
 
         //CELLS
         //First column
-        Cell cell00 = new Cell(Color.BROWN, 0, 0);
-        Cell cell01 = new Cell(Color.BROWN, 0, constant);
-        Cell cell02 = new Cell(Color.BROWN, 0, 2 * constant);
-        Cell cell03 = new Cell(Color.BROWN, 0, 3 * constant);
-        Cell cell04 = new Cell(Color.BROWN, 0, 4 * constant);
+        Cell cell00 = new Cell(Color.RED, 0, 0);
+        Cell cell01 = new Cell(Color.RED, 0, constant);
+        Cell cell02 = new Cell(Color.RED, 0, 2 * constant);
+        Cell cell03 = new Cell(Color.RED, 0, 3 * constant);
+        Cell cell04 = new Cell(Color.RED, 0, 4 * constant);
         //Second column
         Cell cell10 = new Cell(Color.DARK_GREY, constant, 0);
         Cell cell11 = new Cell(Color.LIGHT_GREY, constant, constant);
@@ -57,11 +57,11 @@ public class BoardBuilder {
         Cell cell53 = new Cell(Color.LIGHT_GREY, 5 * constant, 3 * constant);
         Cell cell54 = new Cell(Color.DARK_GREY, 5 * constant, 4 * constant);
         //Seventh column
-        Cell cell60 = new Cell(Color.BROWN, 6 * constant, 0);
-        Cell cell61 = new Cell(Color.BROWN, 6 * constant, constant);
-        Cell cell62 = new Cell(Color.BROWN, 6 * constant, 2 * constant);
-        Cell cell63 = new Cell(Color.BROWN, 6 * constant, 3 * constant);
-        Cell cell64 = new Cell(Color.BROWN, 6 * constant, 4 * constant);
+        Cell cell60 = new Cell(Color.RED, 6 * constant, 0);
+        Cell cell61 = new Cell(Color.RED, 6 * constant, constant);
+        Cell cell62 = new Cell(Color.RED, 6 * constant, 2 * constant);
+        Cell cell63 = new Cell(Color.RED, 6 * constant, 3 * constant);
+        Cell cell64 = new Cell(Color.RED, 6 * constant, 4 * constant);
 
 
         //SET CELLS
