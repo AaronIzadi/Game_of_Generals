@@ -63,6 +63,6 @@ upgraded.
 
 ```
 This mini project was originally designed by a teacher assistant of the course "Advanced Programming".
-Here is the link to his Github: [Aeirya](https://github.com/aeirya) .
+Here is the link to his Github: https://github.com/aeirya .
 Good luck!
 ```
