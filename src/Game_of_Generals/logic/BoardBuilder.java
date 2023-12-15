@@ -13,7 +13,7 @@ public class BoardBuilder {
 
     public Board build() {
 
-        Board board = new Board();
+        Board board = Board.getInstance();
 
         List<Cell> cells = new LinkedList<>();
         List<Piece> pieces = new LinkedList<>();

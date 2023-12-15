@@ -21,7 +21,7 @@ public class Board {
         return board;
     }
 
-    public Board() {
+    private Board() {
         cells = new LinkedList<>();
         pieces = new LinkedList<>();
         board = this;

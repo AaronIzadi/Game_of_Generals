@@ -1,5 +1,6 @@
 package Game_of_Generals.model.piece;
 
+import Game_of_Generals.logic.LogicalAgent;
 import Game_of_Generals.model.Board;
 import Game_of_Generals.model.Cell;
 import Game_of_Generals.model.Color;
@@ -33,7 +34,7 @@ public class Piece {
 
         if (isValidMove(destination)) {
 
-            if (this.currentCell.getX() == 0 && this.currentCell.getY() == 0) {
+            if ((this.getColor() == Color.WHITE && currentCell.getX() == 0) || (this.getColor() == Color.BLACK && currentCell.getX() == 6)) {
 
                 if (getPlayer().getHitPiece().contains(this.type)) {
                     for (PieceType type : getPlayer().getHitPiece()) {
@@ -56,6 +57,11 @@ public class Piece {
                     piece.setAlive(false);
                     piece.setColor(this.getColor());
                     getPlayer().addHitPiece(piece.getType());
+                } else {
+                    piece.setAlive(false);
+                    destination.setPiece(null);
+                    board.removePiece(piece);
+                    LogicalAgent.getInstance().checkForEndGame();
                 }
             }
 
@@ -66,9 +72,11 @@ public class Piece {
 
                 int index = getPlayer().getHitPiece().size();
                 if (this.getColor() == Color.WHITE) {
-                    hitPiece.setCurrentCell(board.getCell(0, 5 - index));
+                    hitPiece.setCurrentCell(board.getCell(1, 6 - index));
+                    board.getCell(1, 6 - index).setPiece(hitPiece);
                 } else {
-                    hitPiece.setCurrentCell(board.getCell(6, index));
+                    hitPiece.setCurrentCell(board.getCell(7, index));
+                    board.getCell(7, index).setPiece(hitPiece);
                 }
                 hitPiece.setPlayer(getPlayer());
                 hitPiece.setActivated(false);
@@ -78,15 +86,16 @@ public class Piece {
                 getPlayer().setPieces(newPlayerPieces);
             }
 
-            if (this.currentCell.getX() != 0 && this.currentCell.getY() != 0) {
-                if (this.getColor() == Color.BLACK && destination.getY() < 3) {
+            if (this.currentCell.getX() != 0 && this.currentCell.getX() != 6) {
+                if (this.getColor() == Color.BLACK && destination.getY() > 3) {
                     this.setActivated(true);
                 }
-                if (this.getColor() == Color.WHITE && destination.getY() > 3) {
+                if (this.getColor() == Color.WHITE && destination.getY() < 3) {
                     this.setActivated(true);
                 }
             }
             this.setCurrentCell(destination);
+            destination.setPiece(this);
         }
     }
 

@@ -1,4 +1,4 @@
-package Game_of_Generals.graphic;
+package Game_of_Generals.graphic.input;
 
 import Game_of_Generals.logic.LogicalAgent;
 
@@ -7,10 +7,13 @@ import java.awt.event.MouseListener;
 
 public class BoardMouseListener implements MouseListener {
 
-    private final LogicalAgent logicalAgent = new LogicalAgent();
+    private static final BoardMouseListener instance = new BoardMouseListener();
 
-    public BoardMouseListener() {
+    public static BoardMouseListener getInstance() {
+        return instance;
     }
+
+    private BoardMouseListener() {}
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -21,7 +24,7 @@ public class BoardMouseListener implements MouseListener {
     public void mousePressed(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-        logicalAgent.selectCell((x / 144) + 1, (y / 144) + 1);
+        LogicalAgent.getInstance().selectCell((x / 144) + 1, (y / 144) + 1);
     }
 
     @Override

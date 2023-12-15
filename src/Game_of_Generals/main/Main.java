@@ -1,6 +1,6 @@
 package Game_of_Generals.main;
 
-import Game_of_Generals.graphic.GameEngine;
+import Game_of_Generals.logic.GameEngine;
 import Game_of_Generals.logic.LogicalAgent;
 import Game_of_Generals.model.Color;
 import Game_of_Generals.model.piece.PieceType;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        LogicalAgent logicalAgent = new LogicalAgent();
+        LogicalAgent logicalAgent = LogicalAgent.getInstance();
 
         GameEngine.getInstance();
 
@@ -71,24 +71,24 @@ public class Main {
 
                 if (turn % 2 == 1 && lowStr.equals(str)) {
 
-                    if (logicalAgent.getPieceByCell(pieceType, Color.BLACK, start_x, start_y) != null && logicalAgent.getDestination(end_x, end_y) != null) {
+                    if (logicalAgent.getCellByPiece(pieceType, Color.BLACK, start_x, start_y) != null && logicalAgent.getDestination(end_x, end_y) != null) {
 
-                        if (logicalAgent.getPieceByCell(pieceType, Color.BLACK, start_x, start_y).isValidMove(logicalAgent.getDestination(end_x, end_y))) {
+                        if (logicalAgent.getCellByPiece(pieceType, Color.BLACK, start_x, start_y).isValidMove(logicalAgent.getDestination(end_x, end_y))) {
                             turn++;
                         }
-                        logicalAgent.getPieceByCell(pieceType, Color.BLACK, start_x, start_y).moveTo(logicalAgent.getDestination(end_x, end_y));
+                        logicalAgent.getCellByPiece(pieceType, Color.BLACK, start_x, start_y).moveTo(logicalAgent.getDestination(end_x, end_y));
                     }
 
                 }
 
                 if (turn % 2 == 0 && str.toUpperCase().equals(str)) {
 
-                    if (logicalAgent.getPieceByCell(pieceType, Color.WHITE, start_x, start_y) != null && logicalAgent.getDestination(end_x, end_y) != null) {
+                    if (logicalAgent.getCellByPiece(pieceType, Color.WHITE, start_x, start_y) != null && logicalAgent.getDestination(end_x, end_y) != null) {
 
-                        if (logicalAgent.getPieceByCell(pieceType, Color.WHITE, start_x, start_y).isValidMove(logicalAgent.getDestination(end_x, end_y))) {
+                        if (logicalAgent.getCellByPiece(pieceType, Color.WHITE, start_x, start_y).isValidMove(logicalAgent.getDestination(end_x, end_y))) {
                             turn++;
                         }
-                        logicalAgent.getPieceByCell(pieceType, Color.WHITE, start_x, start_y).moveTo(logicalAgent.getDestination(end_x, end_y));
+                        logicalAgent.getCellByPiece(pieceType, Color.WHITE, start_x, start_y).moveTo(logicalAgent.getDestination(end_x, end_y));
                     }
 
                 }

@@ -1,4 +1,4 @@
-package Game_of_Generals.graphic;
+package Game_of_Generals.graphic.loader;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -14,7 +14,7 @@ public class ImageLoader {
     private final BufferedImage silverGeneralWhite, silverGeneralBlack;
     private final BufferedImage lanceWhite, lanceBlack;
     private final BufferedImage kingWhite, kingBlack;
-    private final BufferedImage startScreen, aboutScreen;
+    private final BufferedImage startScreen, aboutScreen, whiteWins, blackWins;
     private final BufferedImage icon;
     private final BufferedImage selectIcon;
     private static final ImageLoader instance = new ImageLoader();
@@ -35,6 +35,8 @@ public class ImageLoader {
         this.kingBlack = loadImage("/KingBlack.png");
         this.startScreen = loadImage("/Start.png");
         this.aboutScreen = loadImage("/About.png");
+        this.whiteWins = loadImage("/White.png");
+        this.blackWins = loadImage("/Black.png");
         this.icon = loadImage("/Icon.png");
         this.selectIcon = pawnWhite;
     }
@@ -111,8 +113,17 @@ public class ImageLoader {
     public BufferedImage getAboutScreen() {
         return aboutScreen;
     }
+
     public BufferedImage getStartScreen() {
         return startScreen;
+    }
+
+    public BufferedImage getBlackWins() {
+        return blackWins;
+    }
+
+    public BufferedImage getWhiteWins() {
+        return whiteWins;
     }
 
     public BufferedImage getIcon() {

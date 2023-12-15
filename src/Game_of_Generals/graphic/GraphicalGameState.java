@@ -1,6 +1,6 @@
 package Game_of_Generals.graphic;
 
-public enum GameState {
+public enum GraphicalGameState {
 
     START_SCREEN,
     ABOUT_SCREEN,

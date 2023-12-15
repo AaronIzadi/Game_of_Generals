@@ -1,5 +1,7 @@
 package Game_of_Generals.graphic;
 
+import Game_of_Generals.graphic.loader.ImageLoader;
+import Game_of_Generals.logic.GameEngine;
 import Game_of_Generals.model.Board;
 import Game_of_Generals.model.Color;
 import Game_of_Generals.model.piece.Piece;
@@ -28,16 +30,16 @@ public class UIManager extends JPanel {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g.create();
-        GameState gameState = engine.getGameState();
+        GraphicalGameState graphicalGameState = engine.getGameState();
 
-        if (gameState == GameState.START_SCREEN) {
+        if (graphicalGameState == GraphicalGameState.START_SCREEN) {
             drawStartScreen(g2);
-        } else if (gameState == GameState.ABOUT_SCREEN) {
+        } else if (graphicalGameState == GraphicalGameState.ABOUT_SCREEN) {
             drawAboutScreen(g2);
-        } else if (gameState == GameState.RUNNING) {
+        } else if (graphicalGameState == GraphicalGameState.RUNNING) {
             drawBoard(g2);
         } else {
-            //TODO , we are in winner announcement state
+            drawWinnerAnnouncementScreen(g2);
         }
         g2.dispose();
     }
@@ -46,7 +48,15 @@ public class UIManager extends JPanel {
     private void drawStartScreen(Graphics2D g2) {
         int row = engine.getStartScreenSelection().getLineNumber();
         g2.drawImage(imageLoader.getStartScreen(), 0, 0, null);
-        g2.drawImage(selectIcon, 290, row * 70 + 375, null);
+        g2.drawImage(selectIcon, 290, row * 90 + 375, null);
+    }
+
+    private void drawWinnerAnnouncementScreen(Graphics2D g2) {
+        if (GameEngine.getInstance().ifBlackWon()) {
+            g2.drawImage(imageLoader.getBlackWins(), 0, 0, null);
+        } else {
+            g2.drawImage(imageLoader.getWhiteWins(), 0, 0, null);
+        }
     }
 
     private void drawAboutScreen(Graphics2D g2) {

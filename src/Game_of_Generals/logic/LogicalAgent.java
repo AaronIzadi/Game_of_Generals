@@ -1,7 +1,8 @@
 package Game_of_Generals.logic;
 
-import Game_of_Generals.graphic.GameEngine;
+import Game_of_Generals.graphic.GraphicalGameState;
 import Game_of_Generals.model.*;
+import Game_of_Generals.model.piece.King;
 import Game_of_Generals.model.piece.Piece;
 import Game_of_Generals.model.piece.PieceType;
 
@@ -12,9 +13,15 @@ public class LogicalAgent {
     private Board board = Board.getInstance();
     private Cell current;
 
+    private static final LogicalAgent instance = new LogicalAgent();
 
-    public LogicalAgent() {
+
+    private LogicalAgent() {
         this.gameState = loadGameState();
+    }
+
+    public static LogicalAgent getInstance() {
+        return instance;
     }
 
     public GameState getGameState() {
@@ -35,31 +42,32 @@ public class LogicalAgent {
         String str = null;
 
         for (Piece piece : board.getPieces()) {
-            if (piece.getType() == PieceType.KING) {
-                if (piece.getColor() == Color.WHITE) {
-                    kingWhite = piece;
-                }
+            if (piece instanceof King && piece.getColor() == Color.WHITE) {
+                kingWhite = piece;
             }
         }
         for (Piece piece : board.getPieces()) {
-            if (piece.getType() == PieceType.KING) {
-                if (piece.getColor() == Color.BLACK) {
-                    kingBlack = piece;
-                }
+            if (piece instanceof King && piece.getColor() == Color.BLACK) {
+                kingBlack = piece;
             }
         }
 
         if (kingBlack == null || !kingBlack.isAlive()) {
             str = "white wins!";
+            GameEngine.getInstance().setBlackWon(false);
         }
         if (kingWhite == null || !kingWhite.isAlive()) {
             str = "black wins!";
+            GameEngine.getInstance().setBlackWon(true);
         }
 
+        if (str != null){
+            GameEngine.getInstance().setGraphicalGameState(GraphicalGameState.WINNER_ANNOUNCEMENT);
+        }
         return str;
     }
 
-    public Piece getPieceByCell(PieceType pieceType, Color color, int x, int y) {
+    public Piece getCellByPiece(PieceType pieceType, Color color, int x, int y) {
 
         for (Piece piece : board.getPieces()) {
             if (pieceType == piece.getType() && piece.getColor() == color && piece.getCurrentCell().getX() == x && piece.getCurrentCell().getY() == y) {
@@ -95,6 +103,7 @@ public class LogicalAgent {
                 if (piece.isValidMove(cell)) {
                     piece.moveTo(cell);
                     updateBoard(current, cell);
+                    current = null;
                     GameEngine.getInstance().setNextPlayer();
                 }
             }

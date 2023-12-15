@@ -1,24 +1,34 @@
-package Game_of_Generals.graphic;
+package Game_of_Generals.logic;
 
-import Game_of_Generals.logic.BoardBuilder;
+import Game_of_Generals.graphic.*;
+import Game_of_Generals.graphic.input.BoardMouseListener;
+import Game_of_Generals.graphic.input.ButtonAction;
+import Game_of_Generals.graphic.input.MenuKeyListener;
+import Game_of_Generals.graphic.UIManager;
+import Game_of_Generals.graphic.loader.ImageLoader;
+import Game_of_Generals.graphic.loader.SoundManager;
 import Game_of_Generals.model.Board;
 import Game_of_Generals.model.Color;
 import Game_of_Generals.model.Player;
 
 import javax.swing.*;
 
-public class GameEngine implements Runnable{
+public class GameEngine implements Runnable {
 
     private static final GameEngine instance = new GameEngine();
     private final static int WIDTH = 1008, HEIGHT = 720;
     private final ImageLoader imageLoader = ImageLoader.getInstance();
-    private GameState gameState = GameState.RUNNING;
+    private GraphicalGameState graphicalGameState = GraphicalGameState.START_SCREEN;
     private StartScreenSelection startScreenSelection = StartScreenSelection.START_GAME;
-    private UIManager uiManager;
-    private BoardBuilder boardBuilder = new BoardBuilder();
+    private final MenuKeyListener keyListener = MenuKeyListener.getInstance();
+    private final BoardMouseListener mouseListener = BoardMouseListener.getInstance();
+    private final BoardBuilder boardBuilder = new BoardBuilder();
+    private SoundManager soundManager;
+    private Game_of_Generals.graphic.UIManager uiManager;
     private Board board;
     private Thread thread;
     private Player currentPlayer;
+    private boolean blackWon = false;
 
     public static GameEngine getInstance() {
         return instance;
@@ -29,8 +39,9 @@ public class GameEngine implements Runnable{
     }
 
     private void initial() {
-        uiManager = new UIManager(this, WIDTH, HEIGHT);
+        uiManager = new Game_of_Generals.graphic.UIManager(this, WIDTH, HEIGHT);
         board = boardBuilder.build();
+        soundManager = new SoundManager();
         if (board.getPlayer1().getColor() == Color.BLACK) {
             currentPlayer = board.getPlayer1();
         } else {
@@ -39,8 +50,8 @@ public class GameEngine implements Runnable{
         JFrame frame = new JFrame("Game of Generals");
         frame.setIconImage(imageLoader.getIcon());
         frame.add(uiManager);
-        frame.addMouseListener(new BoardMouseListener());
-        //frame.addKeyListener(inputManager);
+        frame.addMouseListener(mouseListener);
+        frame.addKeyListener(keyListener);
         frame.pack();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -68,7 +79,7 @@ public class GameEngine implements Runnable{
                 delta--;
             }
 
-            if (gameState != GameState.RUNNING) {
+            if (graphicalGameState != GraphicalGameState.RUNNING) {
                 timer = System.currentTimeMillis();
             }
 
@@ -91,12 +102,35 @@ public class GameEngine implements Runnable{
         }).start();
     }
 
+    public void receiveInput() {
+        if (graphicalGameState == GraphicalGameState.START_SCREEN) {
+            if (keyListener.getCurrentAction() == ButtonAction.SELECT) {
+                if (startScreenSelection == StartScreenSelection.START_GAME) {
+                    graphicalGameState = GraphicalGameState.RUNNING;
+                    soundManager.playBackground();
+                } else {
+                    graphicalGameState = GraphicalGameState.ABOUT_SCREEN;
+                }
+            } else {
+                selectOptionsOnStart(keyListener.getCurrentAction() == ButtonAction.GO_UP);
+            }
+        } else if (graphicalGameState == GraphicalGameState.RUNNING || graphicalGameState == GraphicalGameState.ABOUT_SCREEN || graphicalGameState==GraphicalGameState.WINNER_ANNOUNCEMENT){
+            if (keyListener.getCurrentAction() == ButtonAction.BACK){
+                graphicalGameState = GraphicalGameState.START_SCREEN;
+            }
+        }
+    }
+
+    private void selectOptionsOnStart(boolean selectUp) {
+        startScreenSelection = startScreenSelection.select(selectUp);
+    }
+
     public UIManager getUiManager() {
         return uiManager;
     }
 
-    public GameState getGameState() {
-        return gameState;
+    public GraphicalGameState getGameState() {
+        return graphicalGameState;
     }
 
     public StartScreenSelection getStartScreenSelection() {
@@ -121,5 +155,17 @@ public class GameEngine implements Runnable{
         } else {
             currentPlayer = board.getPlayer1();
         }
+    }
+
+    public void setBlackWon(boolean blackWon) {
+        this.blackWon = blackWon;
+    }
+
+    public boolean ifBlackWon() {
+        return blackWon;
+    }
+
+    public void setGraphicalGameState(GraphicalGameState graphicalGameState) {
+        this.graphicalGameState = graphicalGameState;
     }
 }

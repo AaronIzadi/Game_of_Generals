@@ -15,16 +15,16 @@ public class Lance extends Piece {
     public boolean isValidMove(Cell destination) {
 
         Cell currentCell = this.getCurrentCell();
-        int x1 = currentCell.getX();
-        int y1 = currentCell.getY();
-        int x2 = destination.getX();
-        int y2 = destination.getY();
+        int x1 = (currentCell.getX() / 144);
+        int y1 = (currentCell.getY() / 144);
+        int x2 = (destination.getX() / 144);
+        int y2 = (destination.getY() / 144);
 
-        if (x2 > 5 || x2 < 1 || y2 > 5 || y2 < 1) {
+        if (x2 > 6 || x2 < 1 || y2 > 5 || y2 < 0) {
             return false;
         }
 
-        if (x1 == 0 && y1 == 0) {
+        if ((this.getColor() == Color.WHITE && x1 == 1) || (this.getColor() == Color.BLACK && x1 == 7)) {
             for (Piece piece : getPlayer().getPieces()) {
                 if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
                     return false;
@@ -117,10 +117,10 @@ public class Lance extends Piece {
         }
 
         if (this.getColor() == Color.WHITE) {
-            if (y2 <= y1) {
+            if (y2 >= y1) {
                 return false;
             }
-            for (int i = 1; i < y2 - y1; i++) {
+            for (int i = 1; i < y1 - y2; i++) {
                 for (Piece piece : getPlayer().getRival().getPieces()) {
                     if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y1 + i) {
                         return false;
@@ -128,7 +128,7 @@ public class Lance extends Piece {
                 }
             }
 
-            for (int i = 1; i <= y2 - y1; i++) {
+            for (int i = 1; i <= y1 - y2; i++) {
                 for (Piece piece : getPlayer().getPieces()) {
                     if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y1 + i) {
                         return false;
@@ -136,10 +136,10 @@ public class Lance extends Piece {
                 }
             }
         } else {
-            if (y2 >= y1) {
+            if (y2 <= y1) {
                 return false;
             }
-            for (int i = 1; i < y1 - y2; i++) {
+            for (int i = 1; i < y2 - y1; i++) {
                 for (Piece piece : getPlayer().getRival().getPieces()) {
                     if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y1 - i) {
                         return false;
@@ -147,7 +147,7 @@ public class Lance extends Piece {
                 }
             }
 
-            for (int i = 1; i <= y1 - y2; i++) {
+            for (int i = 1; i <= y2 - y1; i++) {
                 for (Piece piece : getPlayer().getPieces()) {
                     if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y1 - i) {
                         return false;

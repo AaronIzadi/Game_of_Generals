@@ -16,16 +16,16 @@ public class GoldenGeneral extends Piece {
     public boolean isValidMove(Cell destination) {
 
         Cell currentCell = this.getCurrentCell();
-        int x1 = currentCell.getX();
-        int y1 = currentCell.getY();
-        int x2 = destination.getX();
-        int y2 = destination.getY();
+        int x1 = (currentCell.getX() / 144);
+        int y1 = (currentCell.getY() / 144);
+        int x2 = (destination.getX() / 144);
+        int y2 = (destination.getY() / 144);
 
-        if (x2 > 5 || x2 < 1 || y2 > 5 || y2 < 1) {
+        if (x2 > 6 || x2 < 1 || y2 > 5 || y2 < 0) {
             return false;
         }
 
-        if (x1 == 0 && y1 == 0) {
+        if ((this.getColor() == Color.WHITE && x1 == 1) || (this.getColor() == Color.BLACK && x1 == 7)) {
             for (Piece piece : getPlayer().getPieces()) {
                 if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
                     return false;
@@ -41,7 +41,7 @@ public class GoldenGeneral extends Piece {
 
         if (x2 == x1 - 1 && y2 == y1 + 1) {
 
-            if (this.getColor() == Color.WHITE) {
+            if (this.getColor() == Color.BLACK) {
                 for (Piece piece : getPlayer().getPieces()) {
                     if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
                         return false;
@@ -60,7 +60,7 @@ public class GoldenGeneral extends Piece {
             return true;
         } else if (x2 == x1 + 1 && y2 == y1 + 1) {
 
-            if (this.getColor() == Color.WHITE) {
+            if (this.getColor() == Color.BLACK) {
                 for (Piece piece : getPlayer().getPieces()) {
                     if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
                         return false;
@@ -86,7 +86,7 @@ public class GoldenGeneral extends Piece {
             return true;
         } else if (x2 == x1 - 1 && y2 == y1 - 1) {
 
-            if (this.getColor() == Color.BLACK) {
+            if (this.getColor() == Color.WHITE) {
                 for (Piece piece : getPlayer().getPieces()) {
                     if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
                         return false;
@@ -105,7 +105,7 @@ public class GoldenGeneral extends Piece {
             return true;
         } else if (x2 == x1 + 1 && y2 == y1 - 1) {
 
-            if (this.getColor() == Color.BLACK) {
+            if (this.getColor() == Color.WHITE) {
                 for (Piece piece : getPlayer().getPieces()) {
                     if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
                         return false;

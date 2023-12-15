@@ -24,7 +24,7 @@ public class Pawn extends Piece {
             return false;
         }
 
-        if (x1 == 0 && y1 == 0) {
+        if ((this.getColor() == Color.WHITE && x1 == 0) || (this.getColor() == Color.BLACK && x1 == 6)) {
             for (Piece piece : getPlayer().getPieces()) {
                 if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
                     return false;
@@ -42,7 +42,7 @@ public class Pawn extends Piece {
 
             if (x2 == x1 - 1 && y2 == y1 + 1) {
 
-                if (this.getColor() == Color.WHITE) {
+                if (this.getColor() == Color.BLACK) {
                     for (Piece piece : getPlayer().getPieces()) {
                         if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
                             return false;
@@ -61,7 +61,7 @@ public class Pawn extends Piece {
                 return true;
             } else if (x2 == x1 + 1 && y2 == y1 + 1) {
 
-                if (this.getColor() == Color.WHITE) {
+                if (this.getColor() == Color.BLACK) {
                     for (Piece piece : getPlayer().getPieces()) {
                         if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
                             return false;
@@ -87,7 +87,7 @@ public class Pawn extends Piece {
                 return true;
             } else if (x2 == x1 - 1 && y2 == y1 - 1) {
 
-                if (this.getColor() == Color.BLACK) {
+                if (this.getColor() == Color.WHITE) {
                     for (Piece piece : getPlayer().getPieces()) {
                         if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
                             return false;
@@ -106,7 +106,7 @@ public class Pawn extends Piece {
                 return true;
             } else if (x2 == x1 + 1 && y2 == y1 - 1) {
 
-                if (this.getColor() == Color.BLACK) {
+                if (this.getColor() == Color.WHITE) {
                     for (Piece piece : getPlayer().getPieces()) {
                         if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
                             return false;
