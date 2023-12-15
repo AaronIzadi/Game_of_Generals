@@ -3,6 +3,7 @@
 ## About this game:
 
 This game is another version of the game known as mini Shogi with two main differences:
+
 1) Pieces can come back to life.
 2) Some pieces have upgrade option!
 
@@ -64,6 +65,8 @@ upgraded.
 ## P.S:
 
 This mini project was originally designed by a teacher assistant of the course "Advanced Programming".
+
 Here is the link to his Github: [Aeirya](https://github.com/aeirya).
+
 Good luck!
 
