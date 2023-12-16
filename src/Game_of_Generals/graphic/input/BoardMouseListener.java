@@ -1,5 +1,7 @@
 package Game_of_Generals.graphic.input;
 
+import Game_of_Generals.graphic.State.GraphicalGameState;
+import Game_of_Generals.logic.GameEngine;
 import Game_of_Generals.logic.LogicalAgent;
 
 import java.awt.event.MouseEvent;
@@ -13,20 +15,22 @@ public class BoardMouseListener implements MouseListener {
         return instance;
     }
 
-    private BoardMouseListener() {}
+    private BoardMouseListener() {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if (GameEngine.getInstance().getGameState() == GraphicalGameState.RUNNING) {
+            int x = e.getX();
+            int y = e.getY();
+            LogicalAgent.getInstance().selectCell((x / 144) + 1, (y / 144) + 1);
+        }
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
 
     }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
-        LogicalAgent.getInstance().selectCell((x / 144) + 1, (y / 144) + 1);
-    }
-
     @Override
     public void mouseReleased(MouseEvent e) {
 

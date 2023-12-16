@@ -1,4 +1,4 @@
-package Game_of_Generals.graphic;
+package Game_of_Generals.graphic.State;
 
 public enum GraphicalGameState {
 

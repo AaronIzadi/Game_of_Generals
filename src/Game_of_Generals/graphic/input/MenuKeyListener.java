@@ -1,6 +1,6 @@
 package Game_of_Generals.graphic.input;
 
-import Game_of_Generals.graphic.GraphicalGameState;
+import Game_of_Generals.graphic.State.GraphicalGameState;
 import Game_of_Generals.logic.GameEngine;
 
 import java.awt.event.KeyEvent;

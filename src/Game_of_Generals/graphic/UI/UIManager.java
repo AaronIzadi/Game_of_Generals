@@ -1,5 +1,6 @@
-package Game_of_Generals.graphic;
+package Game_of_Generals.graphic.UI;
 
+import Game_of_Generals.graphic.State.GraphicalGameState;
 import Game_of_Generals.graphic.loader.ImageLoader;
 import Game_of_Generals.logic.GameEngine;
 import Game_of_Generals.model.Board;

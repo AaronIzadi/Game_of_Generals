@@ -1,10 +1,12 @@
 package Game_of_Generals.logic;
 
-import Game_of_Generals.graphic.*;
+import Game_of_Generals.graphic.State.GraphicalGameState;
+import Game_of_Generals.graphic.State.StartScreenSelection;
+import Game_of_Generals.graphic.UI.UIManager;
 import Game_of_Generals.graphic.input.BoardMouseListener;
 import Game_of_Generals.graphic.input.ButtonAction;
 import Game_of_Generals.graphic.input.MenuKeyListener;
-import Game_of_Generals.graphic.UIManager;
+import Game_of_Generals.graphic.loader.BoardBuilder;
 import Game_of_Generals.graphic.loader.ImageLoader;
 import Game_of_Generals.graphic.loader.SoundManager;
 import Game_of_Generals.model.Board;
@@ -22,9 +24,10 @@ public class GameEngine implements Runnable {
     private StartScreenSelection startScreenSelection = StartScreenSelection.START_GAME;
     private final MenuKeyListener keyListener = MenuKeyListener.getInstance();
     private final BoardMouseListener mouseListener = BoardMouseListener.getInstance();
+    private final LogicalAgent logicalAgent = LogicalAgent.getInstance();
     private final BoardBuilder boardBuilder = new BoardBuilder();
     private SoundManager soundManager;
-    private Game_of_Generals.graphic.UIManager uiManager;
+    private UIManager uiManager;
     private Board board;
     private Thread thread;
     private Player currentPlayer;
@@ -39,7 +42,7 @@ public class GameEngine implements Runnable {
     }
 
     private void initial() {
-        uiManager = new Game_of_Generals.graphic.UIManager(this, WIDTH, HEIGHT);
+        uiManager = new UIManager(this, WIDTH, HEIGHT);
         board = boardBuilder.build();
         soundManager = new SoundManager();
         if (board.getPlayer1().getColor() == Color.BLACK) {
@@ -125,20 +128,12 @@ public class GameEngine implements Runnable {
         startScreenSelection = startScreenSelection.select(selectUp);
     }
 
-    public UIManager getUiManager() {
-        return uiManager;
-    }
-
     public GraphicalGameState getGameState() {
         return graphicalGameState;
     }
 
     public StartScreenSelection getStartScreenSelection() {
         return startScreenSelection;
-    }
-
-    public BoardBuilder getBoardBuilder() {
-        return boardBuilder;
     }
 
     public Board getBoard() {
@@ -167,5 +162,9 @@ public class GameEngine implements Runnable {
 
     public void setGraphicalGameState(GraphicalGameState graphicalGameState) {
         this.graphicalGameState = graphicalGameState;
+    }
+
+    public static void main(String... args) {
+
     }
 }

@@ -1,4 +1,4 @@
-package Game_of_Generals.logic;
+package Game_of_Generals.graphic.loader;
 
 import Game_of_Generals.model.Board;
 import Game_of_Generals.model.Cell;

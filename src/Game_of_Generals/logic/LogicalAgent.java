@@ -1,6 +1,7 @@
 package Game_of_Generals.logic;
 
-import Game_of_Generals.graphic.GraphicalGameState;
+import Game_of_Generals.graphic.State.GraphicalGameState;
+import Game_of_Generals.graphic.loader.BoardBuilder;
 import Game_of_Generals.model.*;
 import Game_of_Generals.model.piece.King;
 import Game_of_Generals.model.piece.Piece;
@@ -35,7 +36,7 @@ public class LogicalAgent {
         return new GameState(board, player1, player2);
     }
 
-    public String checkForEndGame() {
+    public void checkForEndGame() {
 
         Piece kingWhite = null;
         Piece kingBlack = null;
@@ -64,7 +65,6 @@ public class LogicalAgent {
         if (str != null){
             GameEngine.getInstance().setGraphicalGameState(GraphicalGameState.WINNER_ANNOUNCEMENT);
         }
-        return str;
     }
 
     public Piece getCellByPiece(PieceType pieceType, Color color, int x, int y) {

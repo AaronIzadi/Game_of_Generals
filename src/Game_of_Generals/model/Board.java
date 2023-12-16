@@ -73,17 +73,8 @@ public class Board {
 
     public Cell getCell(int x, int y) {
         for (Cell cell : cells) {
-            if ((cell.getX()/144)+1 == x && (cell.getY()/144)+1 == y) {
+            if ((cell.getX() / 144) + 1 == x && (cell.getY() / 144) + 1 == y) {
                 return cell;
-            }
-        }
-        return null;
-    }
-
-    public Piece whichPieceExist(int x, int y) {
-        for (Piece piece : getPieces()) {
-            if (piece.getCurrentCell().getX() == x && piece.getCurrentCell().getY() == y) {
-                return piece;
             }
         }
         return null;
