@@ -1,17 +1,17 @@
 package Game_of_Generals.graphic.State;
 
-public enum StartScreenSelection {
+public enum StartScreenState {
     START_GAME(0),
     VIEW_ABOUT(1);
 
 
     private final int lineNumber;
 
-    StartScreenSelection(int lineNumber) {
+    StartScreenState(int lineNumber) {
         this.lineNumber = lineNumber;
     }
 
-    public StartScreenSelection getSelection(int number) {
+    public StartScreenState getSelection(int number) {
         if (number == 0)
             return START_GAME;
         else if (number == 1)
@@ -20,7 +20,7 @@ public enum StartScreenSelection {
             return null;
     }
 
-    public StartScreenSelection select(boolean toUp) {
+    public StartScreenState select(boolean toUp) {
 
         int selection;
 

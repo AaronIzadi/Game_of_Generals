@@ -1,7 +1,7 @@
 package Game_of_Generals.logic;
 
-import Game_of_Generals.graphic.State.GraphicalGameState;
-import Game_of_Generals.graphic.State.StartScreenSelection;
+import Game_of_Generals.graphic.State.GameState;
+import Game_of_Generals.graphic.State.StartScreenState;
 import Game_of_Generals.graphic.UI.UIManager;
 import Game_of_Generals.graphic.input.BoardMouseListener;
 import Game_of_Generals.graphic.input.ButtonAction;
@@ -20,8 +20,8 @@ public class GameEngine implements Runnable {
     private static final GameEngine instance = new GameEngine();
     private final static int WIDTH = 1008, HEIGHT = 720;
     private final ImageLoader imageLoader = ImageLoader.getInstance();
-    private GraphicalGameState graphicalGameState = GraphicalGameState.START_SCREEN;
-    private StartScreenSelection startScreenSelection = StartScreenSelection.START_GAME;
+    private GameState gameState = GameState.START_SCREEN;
+    private StartScreenState startScreenState = StartScreenState.START_GAME;
     private final MenuKeyListener keyListener = MenuKeyListener.getInstance();
     private final BoardMouseListener mouseListener = BoardMouseListener.getInstance();
     private final LogicalAgent logicalAgent = LogicalAgent.getInstance();
@@ -82,7 +82,7 @@ public class GameEngine implements Runnable {
                 delta--;
             }
 
-            if (graphicalGameState != GraphicalGameState.RUNNING) {
+            if (gameState != GameState.RUNNING) {
                 timer = System.currentTimeMillis();
             }
 
@@ -106,34 +106,34 @@ public class GameEngine implements Runnable {
     }
 
     public void receiveInput() {
-        if (graphicalGameState == GraphicalGameState.START_SCREEN) {
+        if (gameState == GameState.START_SCREEN) {
             if (keyListener.getCurrentAction() == ButtonAction.SELECT) {
-                if (startScreenSelection == StartScreenSelection.START_GAME) {
-                    graphicalGameState = GraphicalGameState.RUNNING;
+                if (startScreenState == StartScreenState.START_GAME) {
+                    gameState = GameState.RUNNING;
                     soundManager.playBackground();
                 } else {
-                    graphicalGameState = GraphicalGameState.ABOUT_SCREEN;
+                    gameState = GameState.ABOUT_SCREEN;
                 }
             } else {
                 selectOptionsOnStart(keyListener.getCurrentAction() == ButtonAction.GO_UP);
             }
-        } else if (graphicalGameState == GraphicalGameState.RUNNING || graphicalGameState == GraphicalGameState.ABOUT_SCREEN || graphicalGameState==GraphicalGameState.WINNER_ANNOUNCEMENT){
+        } else if (gameState == GameState.RUNNING || gameState == GameState.ABOUT_SCREEN || gameState == GameState.WINNER_ANNOUNCEMENT){
             if (keyListener.getCurrentAction() == ButtonAction.BACK){
-                graphicalGameState = GraphicalGameState.START_SCREEN;
+                gameState = GameState.START_SCREEN;
             }
         }
     }
 
     private void selectOptionsOnStart(boolean selectUp) {
-        startScreenSelection = startScreenSelection.select(selectUp);
+        startScreenState = startScreenState.select(selectUp);
     }
 
-    public GraphicalGameState getGameState() {
-        return graphicalGameState;
+    public GameState getGameState() {
+        return gameState;
     }
 
-    public StartScreenSelection getStartScreenSelection() {
-        return startScreenSelection;
+    public StartScreenState getStartScreenSelection() {
+        return startScreenState;
     }
 
     public Board getBoard() {
@@ -160,8 +160,8 @@ public class GameEngine implements Runnable {
         return blackWon;
     }
 
-    public void setGraphicalGameState(GraphicalGameState graphicalGameState) {
-        this.graphicalGameState = graphicalGameState;
+    public void setGraphicalGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 
     public static void main(String... args) {

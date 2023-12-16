@@ -1,6 +1,6 @@
 package Game_of_Generals.graphic.UI;
 
-import Game_of_Generals.graphic.State.GraphicalGameState;
+import Game_of_Generals.graphic.State.GameState;
 import Game_of_Generals.graphic.loader.ImageLoader;
 import Game_of_Generals.logic.GameEngine;
 import Game_of_Generals.model.Board;
@@ -31,13 +31,13 @@ public class UIManager extends JPanel {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g.create();
-        GraphicalGameState graphicalGameState = engine.getGameState();
+        GameState gameState = engine.getGameState();
 
-        if (graphicalGameState == GraphicalGameState.START_SCREEN) {
+        if (gameState == GameState.START_SCREEN) {
             drawStartScreen(g2);
-        } else if (graphicalGameState == GraphicalGameState.ABOUT_SCREEN) {
+        } else if (gameState == GameState.ABOUT_SCREEN) {
             drawAboutScreen(g2);
-        } else if (graphicalGameState == GraphicalGameState.RUNNING) {
+        } else if (gameState == GameState.RUNNING) {
             drawBoard(g2);
         } else {
             drawWinnerAnnouncementScreen(g2);

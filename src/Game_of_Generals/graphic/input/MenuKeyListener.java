@@ -1,6 +1,6 @@
 package Game_of_Generals.graphic.input;
 
-import Game_of_Generals.graphic.State.GraphicalGameState;
+import Game_of_Generals.graphic.State.GameState;
 import Game_of_Generals.logic.GameEngine;
 
 import java.awt.event.KeyEvent;
@@ -17,11 +17,11 @@ public class MenuKeyListener implements KeyListener {
         return instance;
     }
 
-    @Override
-    public void keyTyped(KeyEvent event) {
+    public ButtonAction getCurrentAction() {
+        return currentAction;
     }
 
-    private void notifyInput(ButtonAction action){
+    private void notifyInput(ButtonAction action) {
         if (action != ButtonAction.NO_ACTION) {
             GameEngine.getInstance().receiveInput();
         }
@@ -30,8 +30,8 @@ public class MenuKeyListener implements KeyListener {
     @Override
     public void keyPressed(KeyEvent event) {
         int keyCode = event.getKeyCode();
-        GraphicalGameState state = GameEngine.getInstance().getGameState();
-        if (state == GraphicalGameState.START_SCREEN) {
+        GameState state = GameEngine.getInstance().getGameState();
+        if (state == GameState.START_SCREEN) {
             if (keyCode == VK_DOWN) {
                 currentAction = ButtonAction.GO_DOWN;
             } else if (keyCode == VK_UP) {
@@ -41,7 +41,7 @@ public class MenuKeyListener implements KeyListener {
             } else {
                 currentAction = ButtonAction.NO_ACTION;
             }
-        } else if (state == GraphicalGameState.ABOUT_SCREEN || state == GraphicalGameState.WINNER_ANNOUNCEMENT || state == GraphicalGameState.RUNNING) {
+        } else if (state == GameState.ABOUT_SCREEN || state == GameState.WINNER_ANNOUNCEMENT || state == GameState.RUNNING) {
             if (keyCode == VK_ESCAPE) {
                 currentAction = ButtonAction.BACK;
             } else {
@@ -53,11 +53,12 @@ public class MenuKeyListener implements KeyListener {
     }
 
     @Override
+    public void keyTyped(KeyEvent event) {
+    }
+
+    @Override
     public void keyReleased(KeyEvent e) {
 
     }
 
-    public ButtonAction getCurrentAction() {
-        return currentAction;
-    }
 }
