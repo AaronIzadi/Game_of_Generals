@@ -5,6 +5,7 @@ import Game_of_Generals.graphic.loader.BoardBuilder;
 import Game_of_Generals.model.*;
 import Game_of_Generals.model.piece.King;
 import Game_of_Generals.model.piece.Piece;
+import Game_of_Generals.model.piece.PieceType;
 
 public class LogicalAgent {
     private final BoardBuilder boardBuilder = new BoardBuilder();
@@ -75,6 +76,8 @@ public class LogicalAgent {
                     updateBoard(current, cell);
                     current = null;
                     GameEngine.getInstance().setNextPlayer();
+                    System.out.println(stateToString());
+                    printEachPlayerHitPiece();
                 }
             }
         }
@@ -86,6 +89,116 @@ public class LogicalAgent {
         piece.setCurrentCell(destination);
         current.setPiece(null);
         destination.setPiece(piece);
+    }
+    
+    public String stateToString(){
+
+        StringBuilder state = new StringBuilder();
+
+        for (int y = 5; y > 0; y--) {
+            for (int x = 2; x < 7; x++){
+                Piece piece = board.getCell(x,y).getPiece();
+                if (piece != null) {
+                    if (piece.getColor() == Color.WHITE) {
+                        switch (piece.getType()) {
+                            case PAWN:
+                                state.append('P');
+                                break;
+                            case KING:
+                                state.append('K');
+                                break;
+                            case LANCE:
+                                state.append('L');
+                                break;
+                            case BISHOP:
+                                state.append('B');
+                                break;
+                            case GOLDEN_GENERAL:
+                                state.append('G');
+                                break;
+                            case SILVER_GENERAL:
+                                state.append('S');
+                                break;
+                        }
+                    } else {
+                        switch (piece.getType()) {
+                            case PAWN:
+                                state.append('p');
+                                break;
+                            case KING:
+                                state.append('k');
+                                break;
+                            case LANCE:
+                                state.append('l');
+                                break;
+                            case BISHOP:
+                                state.append('b');
+                                break;
+                            case GOLDEN_GENERAL:
+                                state.append('g');
+                                break;
+                            case SILVER_GENERAL:
+                                state.append('s');
+                                break;
+                        }
+                    }
+                } else {
+                    state.append("-");
+                }
+            }
+        }
+        return state.toString();
+    }
+
+    public void printEachPlayerHitPiece() {
+        StringBuilder hit1 = new StringBuilder("");
+        StringBuilder hit2 = new StringBuilder("");
+        for (PieceType type : board.getPlayer1().getHitPiece()) {
+            switch (type) {
+                case PAWN:
+                    hit1.append('p');
+                    break;
+                case KING:
+                    hit1.append('k');
+                    break;
+                case LANCE:
+                    hit1.append('l');
+                    break;
+                case BISHOP:
+                    hit1.append('b');
+                    break;
+                case GOLDEN_GENERAL:
+                    hit1.append('g');
+                    break;
+                case SILVER_GENERAL:
+                    hit1.append('s');
+                    break;
+            }
+        }
+        for (PieceType type : board.getPlayer2().getHitPiece()) {
+            switch (type) {
+                case PAWN:
+                    hit2.append('P');
+                    break;
+                case KING:
+                    hit2.append('K');
+                    break;
+                case LANCE:
+                    hit2.append('L');
+                    break;
+                case BISHOP:
+                    hit2.append('B');
+                    break;
+                case GOLDEN_GENERAL:
+                    hit2.append('G');
+                    break;
+                case SILVER_GENERAL:
+                    hit2.append('S');
+                    break;
+            }
+        }
+        System.out.println(hit1);
+        System.out.println(hit2);
     }
 
 }
