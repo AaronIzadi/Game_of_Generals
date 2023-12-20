@@ -76,7 +76,7 @@ public class LogicalAgent {
                     updateBoard(current, cell);
                     current = null;
                     GameEngine.getInstance().setNextPlayer();
-                    System.out.println(stateToString());
+                    printCurrentState();
                     printEachPlayerHitPiece();
                 }
             }
@@ -91,7 +91,7 @@ public class LogicalAgent {
         destination.setPiece(piece);
     }
 
-    public String stateToString(){
+    public void printCurrentState(){
 
         StringBuilder state = new StringBuilder();
 
@@ -147,7 +147,7 @@ public class LogicalAgent {
                 }
             }
         }
-        return state.toString();
+        System.out.println(state);
     }
 
     public void printEachPlayerHitPiece() {
