@@ -90,7 +90,7 @@ public class LogicalAgent {
         current.setPiece(null);
         destination.setPiece(piece);
     }
-    
+
     public String stateToString(){
 
         StringBuilder state = new StringBuilder();
@@ -151,54 +151,54 @@ public class LogicalAgent {
     }
 
     public void printEachPlayerHitPiece() {
-        StringBuilder hit1 = new StringBuilder("");
-        StringBuilder hit2 = new StringBuilder("");
+        StringBuilder blackHit = new StringBuilder("");
+        StringBuilder whiteHit = new StringBuilder("");
         for (PieceType type : board.getPlayer1().getHitPiece()) {
             switch (type) {
                 case PAWN:
-                    hit1.append('p');
+                    blackHit.append('p');
                     break;
                 case KING:
-                    hit1.append('k');
+                    blackHit.append('k');
                     break;
                 case LANCE:
-                    hit1.append('l');
+                    blackHit.append('l');
                     break;
                 case BISHOP:
-                    hit1.append('b');
+                    blackHit.append('b');
                     break;
                 case GOLDEN_GENERAL:
-                    hit1.append('g');
+                    blackHit.append('g');
                     break;
                 case SILVER_GENERAL:
-                    hit1.append('s');
+                    blackHit.append('s');
                     break;
             }
         }
         for (PieceType type : board.getPlayer2().getHitPiece()) {
             switch (type) {
                 case PAWN:
-                    hit2.append('P');
+                    whiteHit.append('P');
                     break;
                 case KING:
-                    hit2.append('K');
+                    whiteHit.append('K');
                     break;
                 case LANCE:
-                    hit2.append('L');
+                    whiteHit.append('L');
                     break;
                 case BISHOP:
-                    hit2.append('B');
+                    whiteHit.append('B');
                     break;
                 case GOLDEN_GENERAL:
-                    hit2.append('G');
+                    whiteHit.append('G');
                     break;
                 case SILVER_GENERAL:
-                    hit2.append('S');
+                    whiteHit.append('S');
                     break;
             }
         }
-        System.out.println(hit1);
-        System.out.println(hit2);
+        System.out.println(blackHit);
+        System.out.println(whiteHit);
     }
 
 }
