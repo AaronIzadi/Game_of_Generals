@@ -25,7 +25,7 @@ public class GoldenGeneral extends Piece {
             return false;
         }
 
-        if ((this.getColor() == Color.WHITE && x1 == 1) || (this.getColor() == Color.BLACK && x1 == 7)) {
+        if ((this.getColor() == Color.WHITE && x1 == 1) || (this.getColor() == Color.BLACK && x1 == 6)) {
             for (Piece piece : getPlayer().getPieces()) {
                 if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
                     return false;

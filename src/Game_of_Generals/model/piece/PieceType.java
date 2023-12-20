@@ -7,7 +7,6 @@ public enum PieceType {
     SILVER_GENERAL,
     KING,
     LANCE,
-    PAWN,
-    NONE,
+    PAWN;
 
 }

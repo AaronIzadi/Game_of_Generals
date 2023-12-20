@@ -25,20 +25,6 @@ public class King extends Piece {
             return false;
         }
 
-        if ((this.getColor() == Color.WHITE && x1 == 1) || (this.getColor() == Color.BLACK && x1 == 7)) {
-            for (Piece piece : getPlayer().getPieces()) {
-                if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
-                    return false;
-                }
-            }
-            for (Piece piece : getPlayer().getRival().getPieces()) {
-                if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
         if (x2 == x1 - 1 && y2 == y1 + 1) {
             for (Piece piece : getPlayer().getPieces()) {
                 if (piece.getCurrentCell().getX() == x2 && piece.getCurrentCell().getY() == y2) {

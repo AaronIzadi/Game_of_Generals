@@ -34,7 +34,7 @@ public class Piece {
 
         if (isValidMove(destination)) {
 
-            if ((this.getColor() == Color.WHITE && currentCell.getX() == 0) || (this.getColor() == Color.BLACK && currentCell.getX() == 6)) {
+            if ((this.getColor() == Color.WHITE && currentCell.getX() == 0) || (this.getColor() == Color.BLACK && currentCell.getX() == 6 * 144)) {
 
                 if (getPlayer().getHitPiece().contains(this.type)) {
                     for (PieceType type : getPlayer().getHitPiece()) {
