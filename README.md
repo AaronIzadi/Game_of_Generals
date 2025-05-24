@@ -19,7 +19,7 @@ Game of Generals is a variation of mini Shogi with two main differences:
   To visualize:
   ```
   #  #  #
-    S  G
+     SG
   #     #
   ```
   (# indicates valid cells to move to)
@@ -28,7 +28,7 @@ Game of Generals is a variation of mini Shogi with two main differences:
   To visualize:
   ```
   #  #  #
-  #  G  G
+  #  GG #
      #
   ```
   (# indicates valid cells to move to)
